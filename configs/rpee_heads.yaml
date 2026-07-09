@@ -1,0 +1,7 @@
+path: /kaggle/working/rpee_heads
+train: training/train/images
+val: validation/val/images
+test: testing/test/images
+
+names:
+  0: head
