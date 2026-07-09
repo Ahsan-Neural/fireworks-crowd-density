@@ -1,0 +1,26 @@
+[
+  {
+    "rank": 1,
+    "spot_id": "spot_3",
+    "spot_name": "Spot 3",
+    "head_count": 53,
+    "density": null,
+    "crowd_level": "Moderate"
+  },
+  {
+    "rank": 2,
+    "spot_id": "spot_2",
+    "spot_name": "Spot 2",
+    "head_count": 79,
+    "density": null,
+    "crowd_level": "High"
+  },
+  {
+    "rank": 3,
+    "spot_id": "spot_1",
+    "spot_name": "Spot 1",
+    "head_count": 99,
+    "density": null,
+    "crowd_level": "High"
+  }
+]
