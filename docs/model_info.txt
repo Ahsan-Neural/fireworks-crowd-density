@@ -1,0 +1,8 @@
+Model: YOLO26n fine-tuned on RPEE-Heads
+Classes: 0=head
+Input size: 640x640
+Precision: 0.874
+Recall: 0.729
+mAP50: 0.809
+mAP50-95: 0.443
+Usage: model = YOLO('head_detector_yolo26n.pt')
