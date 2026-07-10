@@ -16,7 +16,7 @@ Camera Feeds → Frame Grabber (OpenCV) → Preprocessing (low-light correction)
 → Ranking Engine → Recommendation Logic (distance + ETA)
 → Streamlit Dashboard
 
-text
+
 
 ## Model Results
 
@@ -56,7 +56,7 @@ Sample detection on a low-light outdoor scene:
 ├── docs/ Model info and metrics
 ├── results/ Training curves, evaluation plots, sample predictions
 
-text
+
 
 ## Usage
 
@@ -70,7 +70,7 @@ results = model.predict(source="your_image.jpg", conf=0.3)
 ## Requirements
 ultralytics
 
-text
+
 
 ## License
 
