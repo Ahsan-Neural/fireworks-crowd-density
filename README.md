@@ -11,12 +11,11 @@ Head detection model trained and evaluated. Multi-feed ranking engine and Stream
 Crowd density estimation is a solved research problem, but no existing system combines real-time multi-camera density comparison with actionable spot recommendations for transient, single-night outdoor events like fireworks displays. Consumer apps rely on historical footfall data tied to permanent venues; this project works from live camera feeds alone, with no prior calibration or history required.
 
 ## Architecture
+
 Camera Feeds → Frame Grabber (OpenCV) → Preprocessing (low-light correction)
 → YOLO26n Head Detector → Density Normalization (homography)
 → Ranking Engine → Recommendation Logic (distance + ETA)
 → Streamlit Dashboard
-
-
 
 ## Model Results
 
@@ -50,13 +49,15 @@ Sample detection on a low-light outdoor scene:
 [RPEE-Heads](https://doi.org/10.34735/ped.2024.2) — Railway Platforms and Event Entrances Heads dataset, licensed CC BY-SA 4.0. Not redistributed here due to size and licensing; download instructions are in the training notebook.
 
 ## Repository Structure
-├── notebooks/ Training notebook
-├── models/ Trained model weights
-├── configs/ Dataset YAML config
-├── docs/ Model info and metrics
-├── results/ Training curves, evaluation plots, sample predictions
 
-
+```text
+.
+├── notebooks/   Training notebook
+├── models/      Trained model weights
+├── configs/     Dataset YAML config
+├── docs/        Model info and metrics
+└── results/     Training curves, evaluation plots, sample predictions
+```
 
 ## Usage
 
@@ -68,9 +69,8 @@ results = model.predict(source="your_image.jpg", conf=0.3)
 ```
 
 ## Requirements
+
 ultralytics
-
-
 
 ## License
 
