@@ -10,25 +10,114 @@ from ultralytics import YOLO
 st.set_page_config(
     page_title="Crowd Density Dashboard",
     layout="wide",
-    initial_sidebar_state="expanded"
+    initial_sidebar_state="collapsed"
 )
 
 st.markdown("""
 <style>
-div[data-testid="stMetric"] {
-    background-color: #1c1f26;
-    border: 1px solid #2a2e37;
-    padding: 16px;
-    border-radius: 10px;
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+
+html, body, [class*="css"] {
+    font-family: 'Inter', sans-serif;
 }
-div[data-testid="stMetricLabel"] { font-size: 14px; color: #9aa0aa; }
-.block-container { padding-top: 2rem; }
-h1, h2, h3 { font-weight: 600; }
+
+.stApp {
+    background: radial-gradient(circle at 20% 20%, #1a1f2e 0%, #0b0d12 60%);
+    background-attachment: fixed;
+}
+
+.block-container {
+    padding-top: 2.5rem;
+    padding-bottom: 3rem;
+}
+
+h1 {
+    font-weight: 700;
+    font-size: 2.2rem;
+    color: #f5f6fa;
+    letter-spacing: -0.5px;
+}
+
+.subtitle {
+    color: #8b93a7;
+    font-size: 0.95rem;
+    margin-top: -10px;
+    margin-bottom: 1.8rem;
+}
+
+/* Glass card container */
+.glass-card {
+    background: rgba(255, 255, 255, 0.04);
+    backdrop-filter: blur(18px);
+    -webkit-backdrop-filter: blur(18px);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 16px;
+    padding: 22px 24px;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.45);
+    margin-bottom: 20px;
+}
+
+div[data-testid="stMetric"] {
+    background: rgba(255, 255, 255, 0.05);
+    backdrop-filter: blur(14px);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    padding: 18px 20px;
+    border-radius: 14px;
+    box-shadow: 0 6px 24px rgba(0, 0, 0, 0.35);
+}
+
+div[data-testid="stMetricLabel"] {
+    font-size: 13px;
+    color: #9aa3b8;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+div[data-testid="stMetricValue"] {
+    color: #f5f6fa;
+    font-weight: 600;
+}
+
+.stTabs [data-baseweb="tab-list"] {
+    gap: 6px;
+    background: rgba(255, 255, 255, 0.03);
+    padding: 6px;
+    border-radius: 12px;
+    border: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+.stTabs [data-baseweb="tab"] {
+    color: #8b93a7;
+    border-radius: 8px;
+    padding: 8px 18px;
+}
+
+.stTabs [aria-selected="true"] {
+    background: rgba(255, 255, 255, 0.08);
+    color: #f5f6fa;
+}
+
+[data-testid="stDataFrame"] {
+    background: rgba(255, 255, 255, 0.03);
+    border-radius: 14px;
+    border: 1px solid rgba(255, 255, 255, 0.07);
+}
+
+.stFileUploader {
+    background: rgba(255, 255, 255, 0.03);
+    border-radius: 14px;
+    padding: 10px;
+    border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+hr {
+    border-color: rgba(255, 255, 255, 0.08);
+}
 </style>
 """, unsafe_allow_html=True)
 
 st.title("Fireworks Crowd Density Dashboard")
-st.caption("Real-time head detection and crowd ranking for fireworks viewing spots.")
+st.markdown('<p class="subtitle">Real-time head detection and crowd ranking for fireworks viewing spots.</p>', unsafe_allow_html=True)
 
 @st.cache_resource
 def load_model():
@@ -68,7 +157,7 @@ def draw_density_grid(frame, boxes, grid_size=8):
     return blended
 
 
-tab1, tab2 = st.tabs(["Spot Rankings", "Live Detection"])
+tab1, tab2 = st.tabs(["Ranking Demo (Sample Data)", "Live Detection"])
 
 with tab1:
     with open("output/ranking_output.json", "r") as f:
@@ -84,21 +173,25 @@ with tab1:
 
     best_spot = df.sort_values(["rank"]).iloc[0]
 
+    st.markdown('<div class="glass-card">', unsafe_allow_html=True)
     col1, col2, col3 = st.columns(3)
     col1.metric("Recommended Spot", best_spot["spot_name"])
     col2.metric("Crowd Level", best_spot["crowd_level"])
     col3.metric("Head Count", int(best_spot["head_count"]))
+    st.markdown('</div>', unsafe_allow_html=True)
 
-    st.divider()
-
+    st.markdown('<div class="glass-card">', unsafe_allow_html=True)
     st.subheader("Spot Rankings")
+    st.caption("Sample output shown here — will reflect live multi-camera feeds once connected.")
     st.dataframe(
         df[["rank", "spot_name", "head_count", "crowd_level"]],
         use_container_width=True,
         hide_index=True
     )
+    st.markdown('</div>', unsafe_allow_html=True)
 
 with tab2:
+    st.markdown('<div class="glass-card">', unsafe_allow_html=True)
     st.subheader("Upload Image or Video for Real-Time Detection")
     mode = st.radio("Input type", ["Image", "Video"], horizontal=True)
 
@@ -150,3 +243,4 @@ with tab2:
             if counts_over_time:
                 st.line_chart(counts_over_time)
                 st.caption("Head count over time across the video.")
+    st.markdown('</div>', unsafe_allow_html=True)
