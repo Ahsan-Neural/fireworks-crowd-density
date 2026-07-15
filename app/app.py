@@ -31,7 +31,7 @@ st.caption("Real-time head detection and crowd ranking for fireworks viewing spo
 
 @st.cache_resource
 def load_model():
-    return YOLO("models/best.pt")
+    return YOLO("models/head_detector_yolo26n.pt")
 
 model = load_model()
 
