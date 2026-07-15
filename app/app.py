@@ -1,3 +1,4 @@
+import os
 import streamlit as st
 import pandas as pd
 import json
@@ -31,7 +32,11 @@ st.caption("Real-time head detection and crowd ranking for fireworks viewing spo
 
 @st.cache_resource
 def load_model():
-    return YOLO("models/head_detector_yolo26n.pt")
+    model_path = "models/head_detector_yolo26n.pt"
+    if not os.path.exists(model_path):
+        st.error(f"Model file not found: {model_path}")
+        st.stop()
+    return YOLO(model_path)
 
 model = load_model()
 
