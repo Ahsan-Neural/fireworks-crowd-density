@@ -5,6 +5,8 @@ from data_loader import load_ranking_data
 from recommendation import get_best_spot
 from locations import SPOT_LOCATIONS
 from map_utils import calculate_distance
+from map_view import create_map
+from streamlit_folium import st_folium
 
 
 # -------------------------------
@@ -81,7 +83,26 @@ with st.container(border=True):
         st.write(f"**Longitude:** {location['longitude']:.4f}")
 
 st.divider()
+# -------------------------------
+# Interactive Map
+# -------------------------------
 
+st.divider()
+
+st.subheader("🗺️ Viewing Spots Map")
+
+map_object = create_map(
+    user_location,
+    SPOT_LOCATIONS,
+    best_spot["spot_id"],
+    ranking_data
+)
+
+st_folium(
+    map_object,
+    width=900,
+    height=500
+)
 
 # -------------------------------
 # Crowd Ranking
@@ -98,3 +119,4 @@ st.dataframe(
     hide_index=True,
     height=180
 )
+
