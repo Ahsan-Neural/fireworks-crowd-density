@@ -1,21 +1,22 @@
 # Fireworks Crowd Density Estimator
 
-A real-time crowd density comparison system for fireworks viewing spots. Detects and counts people across multiple camera feeds using a fine-tuned YOLO26n head detector, then ranks viewing spots from least to most crowded to recommend better alternatives.
+A real-time crowd density comparison system for fireworks viewing spots. Detects and counts people across multiple camera feeds using a fine-tuned YOLO26n head detector, then ranks viewing spots from least to most crowded.
 
 ## Project Status
 
 ## Project Status
 
-✅ YOLO-based head detection model trained and evaluated  
-✅ Crowd ranking engine completed  
-✅ Streamlit dashboard completed  
-✅ Interactive map and viewing spot recommendation added  
+YOLO-based head detection model trained and evaluated  
+Crowd ranking engine completed  
+Streamlit dashboard completed  
+Interactive map and viewing spot recommendation added  
+Repository structure expanded with configs and docs directories
 
 Future improvements include real-time camera integration and live routing.
 
 ## Problem
 
-Crowd density estimation is a solved research problem, but no existing system combines real-time multi-camera density comparison with actionable spot recommendations for transient, single-night outdoor events like fireworks displays. Consumer apps rely on historical footfall data tied to permanent venues; this project works from live camera feeds alone, with no prior calibration or history required.
+Crowd density estimation is a solved research problem, but no existing system combines real-time multi-camera density comparison with actionable spot recommendations for transient, single-night outdoor events such as fireworks displays.
 
 ## Architecture
 
@@ -66,7 +67,7 @@ Sample detection on a low-light outdoor scene:
 
 ## Dataset
 
-[RPEE-Heads](https://doi.org/10.34735/ped.2024.2) — Railway Platforms and Event Entrances Heads dataset, licensed CC BY-SA 4.0. Not redistributed here due to size and licensing; download instructions are in the training notebook.
+[RPEE-Heads](https://doi.org/10.34735/ped.2024.2) — Railway Platforms and Event Entrances Heads dataset, licensed CC BY-SA 4.0. Not redistributed here due to size and licensing; download instructions are available from the dataset provider.
 
 ## Repository Structure
 
@@ -91,6 +92,12 @@ Sample detection on a low-light outdoor scene:
 │   ├── locations.py
 │   ├── map_utils.py
 │   └── map_view.py
+│
+├── configs/
+│   └── Configuration files for model/app settings
+│
+├── docs/
+│   └── Project documentation and notes
 │
 ├── results/
 │   └── Training curves, evaluation plots, sample predictions
