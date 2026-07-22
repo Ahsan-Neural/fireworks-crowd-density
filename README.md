@@ -4,7 +4,14 @@ A real-time crowd density comparison system for fireworks viewing spots. Detects
 
 ## Project Status
 
-Head detection model trained and evaluated. Multi-feed ranking engine and Streamlit dashboard in progress.
+## Project Status
+
+✅ YOLO-based head detection model trained and evaluated  
+✅ Crowd ranking engine completed  
+✅ Streamlit dashboard completed  
+✅ Interactive map and viewing spot recommendation added  
+
+Future improvements include real-time camera integration and live routing.
 
 ## Problem
 
@@ -16,6 +23,19 @@ Camera Feeds → Frame Grabber (OpenCV) → Preprocessing (low-light correction)
 → YOLO26n Head Detector → Density Normalization (homography)
 → Ranking Engine → Recommendation Logic (distance + ETA)
 → Streamlit Dashboard
+
+## Streamlit Application
+
+The application layer integrates the crowd ranking output with location-based recommendations.
+
+Features:
+
+- Load crowd ranking data from JSON output
+- Compare multiple viewing spots
+- Calculate distance from user location
+- Recommend the best viewing spot
+- Interactive map visualization using Folium
+- Highlight recommended location
 
 ## Model Results
 
@@ -52,11 +72,31 @@ Sample detection on a low-light outdoor scene:
 
 ```text
 .
-├── notebooks/   Training notebook
-├── models/      Trained model weights
-├── configs/     Dataset YAML config
-├── docs/        Model info and metrics
-└── results/     Training curves, evaluation plots, sample predictions
+├── notebooks/
+│   └── Model training and evaluation notebooks
+│
+├── models/
+│   └── Trained YOLO head detection weights
+│
+├── src/
+│   └── ranking_engine.py
+│
+├── output/
+│   └── ranking_output.json
+│
+├── app/
+│   ├── app.py
+│   ├── data_loader.py
+│   ├── recommendation.py
+│   ├── locations.py
+│   ├── map_utils.py
+│   └── map_view.py
+│
+├── results/
+│   └── Training curves, evaluation plots, sample predictions
+│
+├── requirements.txt
+└── README.md
 ```
 
 ## Usage
@@ -67,10 +107,33 @@ from ultralytics import YOLO
 model = YOLO("models/head_detector_yolo26n.pt")
 results = model.predict(source="your_image.jpg", conf=0.3)
 ```
+## Run Dashboard
+
+Install dependencies:
+
+pip install -r requirements.txt
+
+Navigate to app folder:
+
+cd app
+
+Run:
+
+streamlit run app.py
+
+The dashboard provides:
+
+Crowd density ranking
+Viewing spot recommendation
+Distance calculation
+Interactive map visualization
+Requirements
 
 ## Requirements
 
-ultralytics
+Install all dependencies:
+
+pip install -r requirements.txt
 
 ## License
 
