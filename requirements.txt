@@ -1,5 +1,8 @@
 streamlit
 pandas
+folium
+streamlit-folium
+geopy
 ultralytics
-opencv-python-headless
+opencv-python
 numpy

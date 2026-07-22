@@ -64,6 +64,21 @@ def create_map(user_location, spot_locations, best_spot_id, ranking_data):
             tooltip=spot_id.replace("_", " ").title(),
             icon=folium.Icon(color=color)
         ).add_to(m)
+    
+        # Route line to recommended spot
+    best_location = spot_locations[best_spot_id]
+
+    folium.PolyLine(
+        locations=[
+            user_location,
+            [
+                best_location["latitude"],
+                best_location["longitude"]
+            ]
+        ],
+        weight=4,
+        tooltip="Recommended Route"
+    ).add_to(m)
 
 
     # Map Legend
